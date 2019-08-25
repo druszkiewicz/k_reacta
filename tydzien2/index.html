@@ -70,6 +70,12 @@
         margin-left: 5px;
     }
 
+    .button.disabled {
+      opacity: 0.35; 
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
   </style>
 </head>
 
@@ -92,7 +98,7 @@
   const mh2 = React.createElement('h2', {className: "Clock"}, 'Pozostało 13:28');
   const mdiv3 = React.createElement('div', {});
   const mdiv4 = React.createElement('div', {className: "ProgressBar"},mdiv3);
-  const mbutton1 = React.createElement('button', {}, 'Start');
+  const mbutton1 = React.createElement('button', {className: "button disabled"}, 'Start');
   const mbutton2 = React.createElement('button', {}, 'Stop');
   const mbutton3 = React.createElement('button', {}, 'Pauzuj');
   const mp = React.createElement('p', {className: 'my_p'}, 'Liczba przerw: 2');
