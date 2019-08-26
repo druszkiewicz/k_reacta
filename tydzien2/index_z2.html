@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <title>Kurs Reacta tydzien 1</title>
+  <style>
+    .App {
+      font-family: sans-serif;
+    }
+
+    .TimeboxEditor {
+      text-align: right;
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      min-width: 60%;
+      margin-left: 20px;
+      font-size: 20px;
+    }
+
+    button {
+      font-size: 16px;
+      margin-left: 10px;
+    }
+
+    .Timebox {
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .Clock {
+      color: orangered;
+    }
+
+    .ProgressBar {
+      border: 1px solid orangered;
+      border-radius: 5px;
+      height: 25px;
+      margin-bottom: 20px;
+      padding: 5px;
+      position: relative;
+    }
+    
+    .ProgressBar > div {
+      height: 50%;
+      width: 45%;
+      background-color: orangered;
+      position: absolute;
+      right: 5px;
+      padding: 3px;
+    }  
+
+    .inactive {
+      filter: blur(2px) grayscale(1);
+    }
+
+    .my_p {
+        display: inline-block;
+        margin-left: 5px;
+    }
+
+    .button.disabled {
+      opacity: 0.35; 
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+<script type="text/javascript">
+  const rootElement = document.getElementById("root");
+
+  const mbr1 = React.createElement('br', {});
+  const mbutton = React.createElement('button', {}, 'Zacznij');
+  const minput1 = React.createElement('input', {type: "text", value: "Uczę się skrótów klawiszowych"});
+  const minput2 = React.createElement('input', {type: "number", value: 25});
+  const mlabel1 = React.createElement('label', {}, 'Co robisz ? ', minput1, mbr1);
+  const mlabel2 = React.createElement('label', {}, 'Ile minut ? ', minput2, mbr1);
+  const mdiv1 = React.createElement('div', {className: "TimeboxEditor inactive"}, mlabel1, mlabel2, mbutton);
+
+  const mh1 = React.createElement('h1', {}, 'Uczę się skrótów klawiszowych');
+  const mh2 = React.createElement('h2', {className: "Clock"}, 'Pozostało 13:28');
+  const mdiv3 = React.createElement('div', {});
+  const mdiv4 = React.createElement('div', {className: "ProgressBar"},mdiv3);
+  const mbutton1 = React.createElement('button', {className: "button disabled"}, 'Start');
+  const mbutton2 = React.createElement('button', {}, 'Stop');
+  const mbutton3 = React.createElement('button', {}, 'Pauzuj');
+  const mp = React.createElement('p', {className: 'my_p'}, 'Liczba przerw: 2');
+
+  const mdiv2 = React.createElement('div', {className: "Timebox"},mh1,mh2,mdiv4,mbutton1, mbutton2, mbutton3,mp);
+  const mdiv = React.createElement('div', {className: "App"},mdiv1,mdiv2);
+  const mbr = React.createElement('br', {});
+  const title = React.createElement('h1', {}, 'Kurs Reacta Tydzień 2');
+  const container = React.createElement('div', {}, title, mbr, mdiv);
+
+ReactDOM.render(
+  container,
+  document.getElementById('root')
+);
+
+</script>
+</html>
