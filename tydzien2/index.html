@@ -79,9 +79,10 @@
     <div class="Timebox">
       <h1>Uczę się skrótów klawiszowych</h1>
       <div id="root"></div>
-      <div class="ProgressBar">
+      <div id="root2"></div>
+      <!-- <div class="ProgressBar">
         <div></div>
-      </div>
+      </div> -->
       <button disabled>Start</button>
       <button>Stop</button>
       <button>Pauzuj</button>
@@ -104,7 +105,7 @@
   //   return <h2 className="Clock">Pozostało 13:28</h2>
   // }
 
-   const rootElement = document.getElementById("root");
+  //  const rootElement = document.getElementById("root");
   // const element = (<Clock />);
 
   //-----------
@@ -114,29 +115,57 @@
   //   return <h2 className="Clock">Pozostało {minutes}:28</h2>  //z destrukturyzacją
   // }
 
-  //destrukturyzacja arhumentów funkcji
-  function Clock({hours=33, minutes=69, seconds=69, milis=9999}) {   //destrukt daje mozl. więcej wart + domyślne
+  // L.8 destrukturyzacja arhumentów funkcji
+  // function Clock({hours=33, minutes=69, seconds=69, milis=9999}) {   //destrukt daje mozl. więcej wart + domyślne
 
-    //normalizacja
+  //   //normalizacja
 
-    (parseInt(hours) < 0) ? hours="0" : (parseInt(hours) > 23) ? hours = "23": hours;
-    (parseInt(minutes) < 0) ? minutes="0" : (parseInt(minutes) > 59) ? minutes = "59": minutes;
-    (parseInt(seconds) < 0) ? seconds="0" : (parseInt(seconds) > 59) ? seconds = "59": seconds;
-    (parseInt(milis) < 0) ? milis="0" : (parseInt(milis) > 999) ? milis = "999": milis;
+  //   (parseInt(hours) < 0) ? hours="0" : (parseInt(hours) > 23) ? hours = "23": hours;
+  //   (parseInt(minutes) < 0) ? minutes="0" : (parseInt(minutes) > 59) ? minutes = "59": minutes;
+  //   (parseInt(seconds) < 0) ? seconds="0" : (parseInt(seconds) > 59) ? seconds = "59": seconds;
+  //   (parseInt(milis) < 0) ? milis="0" : (parseInt(milis) > 999) ? milis = "999": milis;
     
-    (parseInt(hours) < 10) ? hours="0"+hours : hours;
-    (parseInt(minutes) < 10) ? minutes="0"+minutes : minutes;
-    (parseInt(seconds) < 10) ? seconds="0"+seconds : seconds;
-    const ms = parseInt(milis);
-    (ms<10) ? milis="00"+milis : ((ms<100) ? milis="0"+milis : milis);
+  //   (parseInt(hours) < 10) ? hours="0"+hours : hours;
+  //   (parseInt(minutes) < 10) ? minutes="0"+minutes : minutes;
+  //   (parseInt(seconds) < 10) ? seconds="0"+seconds : seconds;
+  //   const ms = parseInt(milis);
+  //   (ms<10) ? milis="00"+milis : ((ms<100) ? milis="0"+milis : milis);
   
-    return <h2 className="Clock">Pozostało {hours}:{minutes}:{seconds}.{milis}</h2>  //z destrukturyzacją
-  }
+  //   return <h2 className="Clock">Pozostało {hours}:{minutes}:{seconds}.{milis}</h2>  //z destrukturyzacją
+  // }
 
 
   // const element = (<Clock minutes="17" seconds="17"/>); 
-    const element = (<Clock />);  // Clock zadziała na domyślnych
+  //   const element = (<Clock />);  // Clock zadziała na domyślnych
 
-  ReactDOM.render(element, rootElement);
+  // ReactDOM.render(element, rootElement);
+
+  // L. 9
+  function Clock({hours=33, minutes=69}) {
+    return <h2 className="Clock">Pozostało {hours}:{minutes}</h2>
+  }
+
+  function ProgressBar({percent=33, trackRemaining=false}) {
+    const pr = parseInt(percent);
+    var result = (
+      <div className="ProgressBar">
+        <div style={{width: `${percent}%`, height: "60px"}}></div>
+      </div>
+    );
+    var result1= (
+      <div className="ProgressBar">
+        <div style={{width: `${percent}%`, height: "20px"}}></div>
+      </div>
+    );
+    var wyn;
+    (trackRemaining) ? wyn=result : wyn=result1;
+    console.log(wyn);
+    return wyn;
+  }
+
+  //ReactDOM.render(<Clock />, document.getElementById("root"));
+  //ReactDOM.render(<ProgressBar percent="19"/>, document.getElementById("root2"));
+  ReactDOM.render(<div><Clock /><ProgressBar percent="19" trackRemaining="false"/></div>, document.getElementById("root"));
+
 </script>
 </html>
