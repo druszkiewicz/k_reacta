@@ -149,23 +149,24 @@
     const pr = parseInt(percent);
     var result = (
       <div className="ProgressBar">
-        <div style={{width: `${percent}%`, height: "60px"}}></div>
+        <div style={{width: `${percent}%`, backgroundColor: "red"}}></div>
       </div>
     );
     var result1= (
       <div className="ProgressBar">
-        <div style={{width: `${percent}%`, height: "20px"}}></div>
+        <div style={{width: `${percent}%`, backgroundColor: "green"}}></div>
       </div>
     );
-    var wyn;
+    var wyn=result;
     (trackRemaining) ? wyn=result : wyn=result1;
+    console.log(trackRemaining);
     console.log(wyn);
-    return wyn;
+    return result;
   }
 
   //ReactDOM.render(<Clock />, document.getElementById("root"));
   //ReactDOM.render(<ProgressBar percent="19"/>, document.getElementById("root2"));
-  ReactDOM.render(<div><Clock /><ProgressBar percent="19" trackRemaining="false"/></div>, document.getElementById("root"));
+  ReactDOM.render(<div><Clock /><ProgressBar percent="19"/></div>, document.getElementById("root"));
 
 </script>
 </html>
