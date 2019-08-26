@@ -145,7 +145,7 @@
     return <h2 className="Clock">Pozostało {hours}:{minutes}</h2>
   }
 
-  function ProgressBar({percent=33, trackRemaining=false}) {
+  function ProgressBar({percent=33, trackRemaining=1}) {
     const pr = parseInt(percent);
     var result = (
       <div className="ProgressBar">
@@ -157,16 +157,16 @@
         <div style={{width: `${percent}%`, backgroundColor: "green"}}></div>
       </div>
     );
-    var wyn=result;
-    (trackRemaining) ? wyn=result : wyn=result1;
+    var wyn;
+    (trackRemaining==="1") ? wyn=result : wyn=result1;
     console.log(trackRemaining);
     console.log(wyn);
-    return result;
+    return wyn;
   }
 
   //ReactDOM.render(<Clock />, document.getElementById("root"));
   //ReactDOM.render(<ProgressBar percent="19"/>, document.getElementById("root2"));
-  ReactDOM.render(<div><Clock /><ProgressBar percent="19"/></div>, document.getElementById("root"));
+  ReactDOM.render(<div><Clock /><ProgressBar percent="19" trackRemaining="0"/></div>, document.getElementById("root"));
 
 </script>
 </html>
