@@ -166,7 +166,13 @@
 
   //ReactDOM.render(<Clock />, document.getElementById("root"));
   //ReactDOM.render(<ProgressBar percent="19"/>, document.getElementById("root2"));
-  ReactDOM.render(<div><Clock /><ProgressBar percent="19" trackRemaining="0"/></div>, document.getElementById("root"));
+  ReactDOM.render(
+    <>
+      <Clock />
+      <ProgressBar percent="19" trackRemaining="0"/>
+    </>, 
+    document.getElementById("root")
+  );
 
 </script>
 </html>
