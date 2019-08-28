@@ -64,42 +64,23 @@
 <body>
     <h1>Kurs Reacta Tydzień 2</h1>
     <hr>
-    <div id="root"></div>
-</body>
-<script type="text/babel">
-
-function TimeboxEditor() {
-  return (
-    <div className="TimeboxEditor inactive">
-            <label>Co robisz? <input disabled value="Uczę się skrótów klawiszowych" type="text"/></label><br/>
-            <label>Ile minut? <input disabled value="25" type="number"/></label><br/>
+    <div class="App">
+        <div class="TimeboxEditor inactive">
+            <label>Co robisz? <input disabled value="Uczę się skrótów klawiszowych" type="text"></label><br>
+            <label>Ile minut? <input disabled value="25" type="number"></label><br>
             <button disabled>Zacznij</button>
-    </div>
-  )
-}
-
-function App () {
-  return (
-    <div className="App"> 
-        <TimeboxEditor />
-        <Timebox />
-    </div>
-  )
-}
-
-function Timebox() {
-  return (
-    <div className="Timebox">
+        </div>
+        <div class="Timebox">
             <h1>Uczę się skrótów klawiszowych</h1>
-            <Clock />
-            <ProgressBar />
+            <div id="root"></div>
             <button disabled>Start</button>
             <button>Stop</button>
             <button>Pauzuj</button>
             Liczba przerw: 2
+        </div>
     </div>
-  )
-}
+</body>
+<script type="text/babel">
 
 function Clock({ minutes = 20, seconds = 48 }) {
     return <h2 className="Clock">Pozostało {minutes}:{seconds}</h2>
@@ -113,10 +94,7 @@ function ProgressBar({ percent = 33 }) {
     );
 }
 
-ReactDOM.render(
-    <App />,
-  document.getElementById("root")
-  );
+ReactDOM.render(<div><Clock /><ProgressBar /></div>, document.getElementById("root"));
 
 </script>
 </html>
