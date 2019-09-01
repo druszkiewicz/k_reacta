@@ -13,7 +13,14 @@
         font-family: sans-serif;
     }
 
-    .TimeboxEditor {
+    .Timebox {
+        border: 1px solid gray;
+        border-radius: 5px;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    .TimeboxEditor, .TimeboxCreator{
         text-align: right;
         border: 1px solid gray;
         border-radius: 5px;
@@ -32,7 +39,7 @@
         margin-left: 10px;
     }
 
-    .Timebox {
+    .CurrentTimebox {
         border: 1px solid gray;
         border-radius: 5px;
         padding: 20px;
@@ -141,7 +148,7 @@ class EditableTimeBox extends React.Component {
           onTitleChange={this.handleTitleChange}
           onTotalTimeInMinutesChange={this.handleTotalTimeInMinutesChange}
         />
-        <Timebox 
+        <CurrentTimebox 
           title={title} 
           isEditable={isEditable}
           onEdit={this.handleEdit}
@@ -152,16 +159,67 @@ class EditableTimeBox extends React.Component {
   }
 }
 
+function TimeboxCreator(props) {
+    return (
+    <div className="TimeboxCreator">
+            <label>
+              Co robisz? 
+              <input 
+                type="text"
+              />
+            </label><br/>
+            <label>
+              Ile minut? 
+              <input
+                type="number"
+              />
+            </label><br/>
+            <button>
+              Dodaj timebox
+            </button>
+    </div>
+    )
+  }
+
+class TimeboxList extends React.Component {
+  state = {
+    timeboxes: [
+      {title: "pierwszy", totalTimeInMinutes: 25},
+      {title: "drugi", totalTimeInMinutes: 35},
+      {title: "trzeci", totalTimeInMinutes: 56}
+    ]
+  }
+  render() {
+    return (
+      < >
+      <TimeboxCreator />
+      {this.state.timeboxes.map((timebox, index)=> (
+        <Timebox key={index} title={timebox.title} totalTimeInMinutes={timebox.totalTimeInMinutes} />
+      ))}
+      </>
+    )
+  }
+}
+
+function Timebox ({title, totalTimeInMinutes}) {
+  return (
+    <div className="Timebox">
+      <h3> {title} - {totalTimeInMinutes} min. h3</h3>
+    </div>
+  )
+}
+
 function App () {
   return (
     <div className="App"> 
-       <EditableTimeBox /> 
+       {/*<EditableTimeBox /> */}
+       <TimeboxList /> 
     </div>
   )
 }
 
 
-class Timebox extends React.Component {
+class CurrentTimebox extends React.Component {
   constructor(props) {
     super(props); //przesłanie do przodka
     this.state = {
@@ -246,17 +304,17 @@ class Timebox extends React.Component {
     const secondsLeft = Math.floor(timeLeftInSeconds%60);
     const progressInPercent = (elapsedTimeInSeconds / totalTimeInSeconds *100);
     return (
-    <div className={`Timebox ${isEditable ? "inactive" : ""}`}>
+    <div className={`CurrentTimebox ${isEditable ? "inactive" : ""}`}>
             <h1>{title}</h1>
             <Clock minutes={minutesLeft} seconds={secondsLeft} className={isPaused ? "inactive" : ""}/>
             <ProgressBar percent={progressInPercent} className={isPaused ? "inactive" : ""}/>
 
     {/*przenieść bindowanie z rendera do konstruktora*/}
             <button onClick={onEdit} disabled={isEditable}>Edytuj</button>
-            <button onClick={this.handleStart} disabled={isRunning}>Start</button>
+            <button onClick={this.handleStart} disabled={isRunning || isEditable}>Start</button>
            {/* <button onClick={this.handleStop} disabled={!isRunning}>Stop</button> */}
-            <button onClick={this.handleStop} disabled={!isRunning}>Stop</button>  {/*przekazanie state - .bind(this)*/}
-            <button onClick={this.togglePause} disabled={!isRunning}>{isPaused ? "Wznów" : "Pauzuj"}</button>
+            <button onClick={this.handleStop} disabled={!isRunning || isEditable}>Stop</button>  {/*przekazanie state - .bind(this)*/}
+            <button onClick={this.togglePause} disabled={!isRunning || isEditable}>{isPaused ? "Wznów" : "Pauzuj"}</button>
             Liczba przerw: {pausesCount}
     </div>
     )
