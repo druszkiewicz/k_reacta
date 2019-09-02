@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kurs Reacta - Tydzień 2</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+      .kolor_p {
+        color: green;
+      }
+    </style>
+
+</head>
+<body>
+    <h1>Kurs Reacta Tydzień 2</h1>
+    <hr>
+    <div id="root"></div>
+</body>
+<!-- -------- --------------->
+
+<script type="text/babel">
+
+// function Header() {
+//   return (
+//     <h2>tekst</h2>
+//     )
+//   };
+
+  const Header = (props) => {
+    console.log(props);
+    return (
+      <h2>tekst {props.par}</h2>
+      )
+  }
+
+  function Par(props) {
+    console.log(props);
+  return (
+    <React.Fragment>
+      <p className={props.className}> {props.imie} {props.nazw} {props.wiek*2} </p>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis ducimus sequi asperiores dolores veniam repellat deserunt, quia, repellendus earum sunt ex ipsam odio similique pariatur aliquid suscipit excepturi reprehenderit porro?
+      </p>
+    </React.Fragment>
+  )
+};
+
+class Footer extends React.Component {
+  state = {
+    nazwa: "chleb",
+    cena: 25
+  }
+  render(){
+    return (
+      <span> 
+        to jest stopka 
+        <p> i ma atyk. {this.state.nazwa} i kosztuje {this.state.cena} zł </p>
+      </span>
+    )
+  }
+}
+
+function App() {
+  return (
+    <>
+    <Header par="param1"/>
+    <Par imie="Antek" nazw="Bzdyl" wiek={44} className="kolor_p"/>
+    <Footer />
+  </>
+  )
+} 
+
+class App2 extends React.Component {
+  state = {
+    item1: "pozycja 1",
+    item2: "pozycja 2",
+    item3: "pozycja to 3",
+    item11: "pozycja 11",
+    item21: "pozycja 21",
+    item31: "pozycja to 31"
+  }
+  render(){
+    return (
+      <>
+        <h1>-------------</h1>
+        <ul>
+          <ListaPoz item={this.state.item1}/>
+          <ListaPoz item={this.state.item2}/>
+          <ListaPoz item={this.state.item3}/>
+        </ul>
+        <ol>
+          <ListaPoz1 item={this.state.item11}/>
+          <ListaPoz1 item={this.state.item21}/>
+          <ListaPoz1 item={this.state.item31}/>
+        </ol>
+      </>
+    )
+  }
+}
+
+class ListaPoz1 extends React.Component {
+  render(){
+    return(
+      <li>{this.props.item}</li>
+    )
+  }
+}
+
+const ListaPoz = (props) => {
+  return(
+    <li>{props.item}</li>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App2 />, document.getElementById("root"));
+</script>
+</html>
