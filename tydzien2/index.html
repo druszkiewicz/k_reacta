@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.min.js"></script>
     <style>
     .App {
         font-family: sans-serif;
@@ -186,9 +187,9 @@ function TimeboxCreator({onCreate}) {
 class TimeboxList extends React.Component {
   state = {
     timeboxes: [
-      {title: "pierwszy", totalTimeInMinutes: 25},
-      {title: "drugi", totalTimeInMinutes: 35},
-      {title: "trzeci", totalTimeInMinutes: 56}
+      {id: "a", title: "pierwszy", totalTimeInMinutes: 25},
+      {id: "b", title: "drugi", totalTimeInMinutes: 35},
+      {id: "c", title: "trzeci", totalTimeInMinutes: 56}
     ]
   }
 
@@ -201,7 +202,7 @@ class TimeboxList extends React.Component {
   }
 
   handleCreate = () => {
-    this.addTimebox({title: "nowy timebox", totalTimeInMinutes: 6})
+    this.addTimebox({id: uuid.v4(), title: "nowy timebox", totalTimeInMinutes: 6})
   }
 
   removeTimebox = (indexToRemove) => {
@@ -228,7 +229,7 @@ class TimeboxList extends React.Component {
       <TimeboxCreator onCreate={this.handleCreate}/>
       {this.state.timeboxes.map((timebox, index)=> (
         <Timebox 
-          key={index} 
+          key={timebox.id} 
           title={timebox.title} 
           totalTimeInMinutes={timebox.totalTimeInMinutes}
           onDelete={() => this.removeTimebox(index)}
@@ -246,6 +247,7 @@ function Timebox ({title, totalTimeInMinutes, onDelete, onEdit}) {
       <h3> {title} - {totalTimeInMinutes} min. h3</h3>
       <button onClick={onDelete}>Usuń</button>
       <button onClick={onEdit}>Zmień</button>
+      <input />
     </div>
   )
 }
